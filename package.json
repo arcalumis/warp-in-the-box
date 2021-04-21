@@ -4,10 +4,10 @@
   "description": "Standard Express Server with Postgresql Support Babel and Webpack",
   "main": "server.js",
   "scripts": {
-    "start": "webpack --mode development && nodemon --exec babel-node server.js",
+    "start": "webpack --mode development --watch && nodemon --exec babel-node server.js --watch",
     "start-prod": "webpack && nodemon --exec babel-node server.js",
     "pm2server": "babel-node server.js",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Baudrillard",
