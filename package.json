@@ -1,0 +1,24 @@
+{
+  "name": "express-postgres",
+  "version": "1.0.0",
+  "description": "Standard Express Server with Postgresql Support Babel and Webpack",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Baudrillard",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.13.16",
+    "@babel/node": "^7.13.13",
+    "@babel/preset-env": "^7.13.15",
+    "babel-preset-env": "^1.7.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "browserslist": "defaults"
+}
