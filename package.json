@@ -4,6 +4,10 @@
   "description": "Standard Express Server with Postgresql Support Babel and Webpack",
   "main": "server.js",
   "scripts": {
+    "start": "webpack --mode development && nodemon --exec babel-node server.js",
+    "start-prod": "webpack && nodemon --exec babel-node server.js",
+    "pm2server": "babel-node server.js",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Baudrillard",
@@ -13,12 +17,26 @@
     "@babel/core": "^7.13.16",
     "@babel/node": "^7.13.13",
     "@babel/preset-env": "^7.13.15",
-    "babel-preset-env": "^1.7.0"
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.4",
+    "file-loader": "^6.2.0",
+    "sass": "^1.32.11",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.35.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "fs-extra": "^9.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "serve-favicon": "^2.5.0"
   },
   "browserslist": "defaults"
 }
