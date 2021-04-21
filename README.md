@@ -85,6 +85,10 @@ Run the file:
 
 ```./setup.sh```
 
+If you are prompted to overwrite configuration file /etc/ssh/sshd_config install the package maintainers version, it really doesn't matter
+
+when asked about /etc/systemd/resolved.conf, type Y or I and press enter
+
 Now you have a user with ssh access setup, and a config file waiting for you in your
 new user's home directory when you log in.  Exit the terminal and log in as the user
 you've created.
