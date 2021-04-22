@@ -7,8 +7,9 @@ The purpose of this repository is to allow anyone to have the access to setting 
   - firewall limited traffic
 - NGINX with SSH Certificate Automatically Created
 - NodeJS (14.x) running Express webserver
-- Babel transpilation, Sass and Webpack out-of-the-box.
-- MongoDB (soon to be optional)
+- React JS, Babel transpilation
+- Sass and Webpack out-of-the-box.
+- MongoDB (optional)
 
 Quickly prototype an idea using advanced build tools.
 
@@ -137,7 +138,7 @@ echo "Init complete, please exit and log back in using the credentials you've en
   - Running the webserver on port 5000
     - This is configurable in the .env file created in your express-babel directory
       - Note: modifying this will requre also modifying /etc/nginx/sites-enabled/default
-- Install MongoDB @ 4.4
+- Install MongoDB @ 4.4 (optional)
 - Install PM2 for persisting your webserver process if and when you're ready
   - Install PM2 Logrotate to prevent an out-of-memory error
 - Install BabelCli and Nodemon packages globally (cross-env is also installed but not currently used)
@@ -179,14 +180,6 @@ apt-get install -y bmon slurm tcptrack build-essential tcl
 echo "Generating 2048 Bit DH Parabolic Long Prime for Encryption"
 
 openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
-
-wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
-
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
-
-apt-get update
-
-apt-get install -y mongodb-org
 
 ufw allow OpenSSH && ufw allow http && ufw allow https
 
@@ -295,6 +288,19 @@ echo "Cleaning Up"
 rm -f ../config
 
 rm -f ../setup.sh
+
+read -p "Would you like to install MongoDB? " -n 1 -r
+
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+
+    apt-get update
+
+    apt-get install -y mongodb-org
+fi
 
 echo "Starting your development server!!!!"
 
