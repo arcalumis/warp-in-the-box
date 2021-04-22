@@ -2,7 +2,7 @@
 
 The purpose of this repository is to allow anyone to have the access to setting up a secure* webserver running the following stack:
 
-- Ubuntu20.04
+- Ubuntu 20.04 w/ easy sudo'd user setup for public key authentication
 - NGINX with SSH Certificate Automatically Created
 - NodeJS (14.x) Running Express Webserver
 - Babel transpilation, Sass and Webpack out-of-the-box.
@@ -84,6 +84,10 @@ chmod 600 /home/"$USERNAME"/.ssh/authorized_keys
 
 chown "$USERNAME":"$USERNAME" /home/"$USERNAME"/.ssh/authorized_keys
 
+echo "Your user $USERNAME is set up."
+
+echo ""
+
 echo "Generating Config for Step 2"
 
 read -p 'Please enter the domain name of this server: ' DOMAIN_NAME
@@ -94,6 +98,12 @@ touch /home/"$USERNAME"/config
 
 echo "DOMAIN_NAME=\"$DOMAIN_NAME\"" >> /home/"$USERNAME"/config
 echo "EMAIL_ADDRESS=\"$EMAIL_ADDRESS\"" >> /home/"$USERNAME"/config
+
+echo "Init complete, please exit and log back in using the credentials you've entered."
+
+read -n 1 -s -r -p "Press any key to continue."
+
+exit
 
 ```
 - Save the file and close the editor
