@@ -1,4 +1,6 @@
-# Preamble
+![warp-in-the-box](https://github.com/arcalumis/warp-in-the-box/assets/warp-in-the-box.png)
+
+## Preamble
 
 The purpose of this repository is to allow anyone to have the access to setting up a secure* webserver running the following stack:
 
