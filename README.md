@@ -276,13 +276,7 @@ npm install -g pm2 @babel/core @babel/cli cross-env nodemon
 
 pm2 install pm2-logrotate
 
-echo "Cleaning Up"
-
 cd /home/"$SUDO_USER"
-
-rm -f config
-
-rm -f setup.sh
 
 git clone https://github.com/arcalumis/warp-in-the-box.git
 
@@ -293,6 +287,12 @@ npm install
 cat > .env <<- EOM
 PORT=5000
 EOM
+
+echo "Cleaning Up"
+
+rm -f ../config
+
+rm -f ../setup.sh
 
 echo "Starting your development server!!!!"
 
