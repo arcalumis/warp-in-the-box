@@ -8,6 +8,7 @@
  - Better Demo Screen
  - Shill Links for Donation Addresses
  - More Descriptive Repository Name
+ - Prompt for setup of secure mongodb connection
 
 ## Let's get Started
 
@@ -44,7 +45,7 @@ echo ""
 
 if [ $PASSWORD = $CONFIRMPASSWORD ]; then
   echo 'Paste in your ssh key! '
-  read -s SSHKEY
+  read -r SSHKEY
 else
   echo 'Passwords Do not Match!'
   exit
@@ -93,7 +94,8 @@ echo "DOMAIN_NAME=\"$DOMAIN_NAME\"" >> /home/"$USERNAME"/config
 
 #### 5. Run it! ####
 - You will be asked for a username, a password and a public key for ssh authentication
-- Have your public SSH key ready to copy and paste in to the console when asked
+  - Check out [this great website](https://www.google.com/search?client=firefox-b-1-d&q=generating+ssk+keys) to find out how to generate ssh keys and other cool stuff
+- Have your public SSH key ready to copy and paste into the console when prompted.
 
 ```./setup.sh```
 
@@ -105,29 +107,28 @@ echo "DOMAIN_NAME=\"$DOMAIN_NAME\"" >> /home/"$USERNAME"/config
 
 #### 6. Part One is Finished! Exit the terminal and log in as the user you've created. ####
 - Now you have a user with ssh access setup, and a config file waiting for you in your new user's home directory when you log in.
-- The config file merely contains the web address you entered towards the end
-- You can use this script to quickly create a new user anytime if that's all you're after.
+- The config file merely contains the web address you entered towards the end of the previous step.
+- You can use this initial setup script to quickly create a new sudo user anytime if that's all you're after.
 
-#### 7. Now we'll create the setup file for Part Two. ####
-- This script will:
-- Enable ufw and limit connections to Http, Https and SSH ports
+#### 7. Now we'll create the setup file for Part Two. This script will: ####
+
+- Enable ufw and limit connections to http, https and ssh ports
   - Defaults to 80, 443 and 22 respectively
 - Generate a unique secure key ( Diffie-Hellman 2048-bit key ) for your setup.
   - This is being modified and will be changed in a future release.
-- Install all the necessary prerequisites for the following.
 - Install bmon slurm tcptrack (server monitoring tools)
 - Install build-essential and tcl
 - Install NGINX and register your domain with Certbot using the email address you provide
-  - Redirect all traffic to HTTPS
-- Run the reverse-proxy listening to port 5000
+  - Redirecting all http traffic to https
+  - Listening for localhost:5000
 - Install NodeJS @ 14.x
   - Running the webserver on port 5000
-  - configurable in the .env file created in your express-babel directory
-  - note changing this will requre modiifying /etc/nginx/sites-enabled/default
+    - This is configurable in the .env file created in your express-babel directory
+      - Note: modifying this will requre also modifying /etc/nginx/sites-enabled/default
 - Install MongoDB @ 4.4
-- Install PM2 for persisting your webserver process if and when you're ready.
-  - Install PM2 Logrotate so you don't get an out-of-memory error in a few weeks.
-- Install BabelCli and Nodemon packages globally (cross-env is also installed but not currently used).
+- Install PM2 for persisting your webserver process if and when you're ready
+  - Install PM2 Logrotate to prevent an out-of-memory error
+- Install BabelCli and Nodemon packages globally (cross-env is also installed but not currently used)
 
 ```touch setup.sh && chmod +x setup.sh && nano setup.sh```
 
@@ -291,12 +292,27 @@ npm start
 ## Congrats ✨🎉
 
 You're all finished.  
- - Your dev server is setup and listening for changes to the directory files.
+ - Your dev server is setup, running and listening for changes to the directory files.
  - Your Sass will be compiled to the dist folder in Main.css.
  - You got a badass Nyan Cat Favion
 
-Using PM2, You can execute the production build of your server by running the following command.
+Restart your developments server with the following command.
 
-```npm run build && sudo pm2 start npm --name "My App" -- pm2server```
+```npm run start```
 
-Read the configs, learn as much as you can.  Happy hacking.
+Using PM2, You can persist your web server by running the following commands.
+
+To webpack for production:
+```npm run build``` 
+
+To create your initial webserver [docs](https://pm2.keymetrics.io/docs/usage/quick-start/)
+```sudo pm2 start npm --name "webserver" -- pm2server```
+
+To persist your pm2 server configuration [docs](https://pm2.keymetrics.io/docs/usage/startup/)
+**DO NOT PASS SUDO TO THIS COMMAND, IT WILL PRINT THE EXACT COMMAND YOU WILL HAVE TO COPY PASTE INTO THE TERMINAL**
+```pm2 startup```
+
+To disable pm2 for development purposes.
+```sudo pm2 stop webserver```
+
+Read the configs, read the docs, learn as much as you can.  Happy hacking.
