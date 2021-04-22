@@ -1,7 +1,70 @@
+// Spektra Color Swatch
+
+@import url(//fonts.googleapis.com/css?family=Fira+Code);
+
+$outside_space: #141429;
+$happy_hacking: #282b75;
+$label_bg: #a296ca;
+
 * { 
   margin : 0;
 }
 
-h1 {
-  color: #0000FF;
+body {
+  margin: 0;
+  font-family: 'Fira Code', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.main_container {
+  height: 100vh;
+  width: 100vw;
+  background-color: $outside_space;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.space_dolphin_container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.space_dolphin {
+  position: relative;
+  top: 15px;
+  left: 25px;
+  width: 60vw; 
+  max-width: 400px;
+  z-index: 100;
+  transform: rotate(-10deg);
+}
+
+.happy_hacking {
+  font-weight: 700;
+  font-size: 18pt;
+  color: $happy_hacking;
+  background-color: $label_bg;
+  padding: 20px;
+}
+
+.react_wheel {
+  animation: AppLogoSpin infinite 20s linear;
+  color: white;  opacity: .6;
+  z-index: 1000;
+  margin-bottom: 70px;
+}
+
+@keyframes AppLogoSpin {
+  from {
+    transform: rotate(0deg);
+  } to {
+    transform: rotate(360deg);
+  }
+
 }
