@@ -1,7 +1,7 @@
 {
-  "name": "express-postgres",
+  "name": "automated-lightweight-isometric-server-setup",
   "version": "1.0.0",
-  "description": "Standard Express Server with Postgresql Support Babel and Webpack",
+  "description": "Babel/Node/Express/Ejs/Webpack/Favicon/Sass",
   "main": "server.js",
   "scripts": {
     "start": "npm-run-all --parallel watch:dev watch:build",
