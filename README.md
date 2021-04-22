@@ -6,7 +6,7 @@
 ## To-Do's
  - Provide links to all component documentation
  - Better Demo Screen
- - Shill Links for DigitalOcean and Donation Adresses
+ - Shill Links for DigitalOcean and Donation Addresses
 
 ## Let's get Started
 
