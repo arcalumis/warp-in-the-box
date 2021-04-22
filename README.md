@@ -1,4 +1,4 @@
-![warp-in-the-box](https://github.com/arcalumis/warp-in-the-box/assets/warp-in-the-box.png)
+![warp-in-the-box](https://github.com/arcalumis/warp-in-the-box/raw/main/assets/warp-in-the-box.png)
 
 ## Preamble
 
