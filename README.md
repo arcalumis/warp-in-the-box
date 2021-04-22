@@ -294,6 +294,15 @@ then
     apt-get update
 
     apt-get install -y mongodb-org
+    
+    echo "Installing NPM Packages MongoDB and Mongoose"
+    
+    npm i -s mongodb mongoose
+    
+    echo "Installing MongoDB monitor for PM2
+    
+    pm2 install pm2-mongodb
+    
 fi
 
 echo "Starting your development server!!!!"
