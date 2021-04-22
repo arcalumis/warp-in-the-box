@@ -337,7 +337,7 @@ To webpack for production:
 
 To create your initial webserver [docs](https://pm2.keymetrics.io/docs/usage/quick-start/)
 
-```sudo pm2 start npm --name "webserver" -- pm2server```
+```sudo pm2 start pm2config.json```
 
 To persist your pm2 server configuration: [docs](https://pm2.keymetrics.io/docs/usage/startup/)
 
