@@ -15,19 +15,19 @@
  - I use [DigitalOcean](https://m.do.co/c/c3e5a07ebd4f) < My Referral Link
  - This has been tested on a $5/mo 1cpu/1gb server
 
-2 Register a Domain or Create an A Record for an Existing Domain
+#### 2. Register a Domain or Create an A Record for an Existing Domain ####
 - Use the IP address of the server generated for you in the previous step
 
 ## Note: These scripts will disable root login
 
 - ONLY USE THEM IF YOU'VE READ THEM AND UNDERSTAND THE ASSOCIATED RISKS!!!
 
-3 Login to the server as root and create a file in your home directory called setup.sh
+#### 3. Login to the server as root and create a file in your home directory called setup.sh ####
 - We'll go ahead and make the file executable while we're at it
 
 ``` touch setup.sh && chmod +x setup.sh && nano setup.sh ```
 
-4 Paste the following contents into the file, save it and exit your editor
+#### 4. Paste the following contents into the file, save it and exit your editor ####
 
 ```
 #!/bin/bash
@@ -91,7 +91,7 @@ echo "DOMAIN_NAME=\"$DOMAIN_NAME\"" >> /home/"$USERNAME"/config
 ```
 - Save the file and close the editor
 
-5 Run it!
+#### 5. Run it! ####
  - You will be asked for a username, a password and a public key for ssh authentication
  - Have your public SSH key ready to copy and paste in to the console when asked
 
@@ -103,35 +103,35 @@ echo "DOMAIN_NAME=\"$DOMAIN_NAME\"" >> /home/"$USERNAME"/config
   - When asked about /etc/systemd/resolved.conf, type Y or I and press enter
    - I believe this changes the DNS lookup address from DO's default
 
-6 Part One is Finished! Exit the terminal and log in as the user you've created.
+#### 6. Part One is Finished! Exit the terminal and log in as the user you've created. ####
  - Now you have a user with ssh access setup, and a config file waiting for you in your new user's home directory when you log in.
  - The config file merely contains the web address you entered towards the end
  - You can use this script to quickly create a new user anytime if that's all you're after.
 
-7 Now we'll create the setup file for Part Two.
- - This script will:
-  - Enable ufw and limit connections to Http, Https and SSH ports
-   - Defaults to 80, 443 and 22 respectively
-  - Generate a unique secure key ( Diffie-Hellman 2048-bit key ) for your setup.
-   - This is being modified and will be changed in a future release.
-  - Install all the necessary prerequisites for the following.
-  - Install bmon slurm tcptrack (server monitoring tools)
-  - Install build-essential and tcl
-  - Install NGINX and register your domain with Certbot using the email address you provide
-   - Redirect all traffic to HTTPS
-   - Run the reverse-proxy listening to port 5000
-  - Install NodeJS @ 14.x
-   - Running the webserver on port 5000
-    - configurable in the .env file created in your express-babel directory
-    - note changing this will requre modiifying /etc/nginx/sites-enabled/default
-  - Install MongoDB @ 4.4
-  - Install PM2 for persisting your webserver process if and when you're ready.
-   - Install PM2 Logrotate so you don't get an out-of-memory error in a few months ;)
-  - Install BabelCli and Nodemon packages globally (cross-env is also installed but not currently used).
+#### 7. Now we'll create the setup file for Part Two. ####
+- This script will:
+- Enable ufw and limit connections to Http, Https and SSH ports
+  - Defaults to 80, 443 and 22 respectively
+- Generate a unique secure key ( Diffie-Hellman 2048-bit key ) for your setup.
+  - This is being modified and will be changed in a future release.
+- Install all the necessary prerequisites for the following.
+- Install bmon slurm tcptrack (server monitoring tools)
+- Install build-essential and tcl
+- Install NGINX and register your domain with Certbot using the email address you provide
+  - Redirect all traffic to HTTPS
+- Run the reverse-proxy listening to port 5000
+- Install NodeJS @ 14.x
+  - Running the webserver on port 5000
+  - configurable in the .env file created in your express-babel directory
+  - note changing this will requre modiifying /etc/nginx/sites-enabled/default
+- Install MongoDB @ 4.4
+- Install PM2 for persisting your webserver process if and when you're ready.
+  - Install PM2 Logrotate so you don't get an out-of-memory error in a few weeks.
+- Install BabelCli and Nodemon packages globally (cross-env is also installed but not currently used).
 
 ```touch setup.sh && chmod +x setup.sh && nano setup.sh```
 
-8 Paste In the Following Code:
+#### 8. Paste In the Following Code: ####
  - You will be prompted for an email address for your free certbot certificate registration.
  - Read through the script before you install it.
 
@@ -282,13 +282,13 @@ npm start
 
 ```
 
-Save the file and close your editor.  Again, make the file executable and run it:
+#### 9. Save the file and close your editor.  Again, make the file executable and run it: ####
 
 ``` sudo ./setup.sh```
 
  - You will be prompted for your password. Note: This takes aboute  minute.
 
-## Congrats
+## Congrats ✨🎉
 
 You're all finished.  
  - Your dev server is setup and listening for changes to the directory files.
