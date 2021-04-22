@@ -288,7 +288,9 @@ cd /home/"$SUDO_USER"
 
 rm -f config
 
-git clone https://github.com/arcalumis/express-babel.git
+rm -f setup.sh
+
+git clone https://github.com/arcalumis/warp-in-the-box.git
 
 cd express-babel
 
