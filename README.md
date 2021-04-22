@@ -21,12 +21,6 @@ Notes: Before beginning, you should have a domain (or subdomain) registered and 
 - It is not necessary to clone this repository.
  - All of the files will be automatically copied to your server.
 
-##### To-Do's for This Repo
- - Provide links to all component documentation
- - Prompt to Make MongoDB Installation Optional
- - Prompt To Make Redis Optional
- - Prompt To Make PostGres Optional
-
 ## Let's get Started
 
 #### 1. Setup a fresh Ubuntu20.04 Server ####
