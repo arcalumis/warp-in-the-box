@@ -1,19 +1,32 @@
-#Basic Server Setup
+# Basic Server Setup
 
-- Setup a fresh Ubuntu20.04 Server, I use DigitalOcean
+- It is not necessary to clone this repository.
+ - All of the files will be automatically copied to your server.
 
-- Register a Domain or Create an A Record for the Existing Domain 
-- Using the IP address of the server generated for you in the previous step
+## To-Do's
+ - Provide links to all component documentation
+ - Better Demo Screen
+ - Shill Links for DigitalOcean and Donation Adresses
 
-- Have your public SSH key ready to copy and paste in to the dialog when asked
+## Let's get Started
+
+1 Setup a fresh Ubuntu20.04 Server
+ - I use DigitalOcean
+ - This has been tested on a $5/mo 1cpu/1gb server
+
+2 Register a Domain or Create an A Record for an Existing Domain
+- Use the IP address of the server generated for you in the previous step
 
 ## Note: These scripts will disable root login
 
-- ONLY USE THEM IF YOU'VE READ THEM AND UNDERSTAND THE RISKS!!!
+- ONLY USE THEM IF YOU'VE READ THEM AND UNDERSTAND THE ASSOCIATED RISKS!!!
 
-- Login to the server as root and create a file in your home directory called setup.sh
+3 Login to the server as root and create a file in your home directory called setup.sh
+- We'll go ahead and make the file executable while we're at it
 
-- Paste the following content into the file, save it and exit your editor
+``` touch setup.sh && chmod +x setup.sh && nano setup.sh ```
+
+4 Paste the following contents into the file, save it and exit your editor
 
 ```
 #!/bin/bash
@@ -77,31 +90,60 @@ echo "DOMAIN_NAME=\"$DOMAIN_NAME\"" >> /home/"$USERNAME"/config
 ```
 - Save the file and close the editor
 
-Make the file executable:
-
-```chmod +x setup.sh```
-
-Run the file:
+5 Run it!
+ - You will be asked for a username, a password and a public key for ssh authentication
+ - Have your public SSH key ready to copy and paste in to the console when asked
 
 ```./setup.sh```
 
-If you are prompted to overwrite configuration file /etc/ssh/sshd_config install the package maintainers version, it really doesn't matter
+ - DigitalOcean uses it's own packages so when you update and upgrade so:
+  - If you are prompted to overwrite configuration file /etc/ssh/sshd_config: install the package maintainers version.
+   - If you're curious about the differences, view the diff, they're just comments in this case.
+  - When asked about /etc/systemd/resolved.conf, type Y or I and press enter
+   - I believe this changes the DNS lookup address from DO's default
 
-when asked about /etc/systemd/resolved.conf, type Y or I and press enter
+6 Part One is Finished! Exit the terminal and log in as the user you've created.
+ - Now you have a user with ssh access setup, and a config file waiting for you in your new user's home directory when you log in.
+ - The config file merely contains the web address you entered towards the end
+ - You can use this script to quickly create a new user anytime if that's all you're after.
 
-Now you have a user with ssh access setup, and a config file waiting for you in your
-new user's home directory when you log in.  Exit the terminal and log in as the user
-you've created.
+7 Now we'll create the setup file for Part Two.
+ - This script will:
+  - Enable ufw and limit connections to Http, Https and SSH ports
+   - Defaults to 80, 443 and 22 respectively
+  - Generate a unique secure key ( Diffie-Hellman 2048-bit key ) for your setup.
+   - This is being modified and will be changed in a future release.
+  - Install all the necessary prerequisites for the following.
+  - Install bmon slurm tcptrack (server monitoring tools)
+  - Install build-essential and tcl
+  - Install NGINX and register your domain with Certbot using the email address you provide
+   - Redirect all traffic to HTTPS
+   - Run the reverse-proxy listening to port 5000
+  - Install NodeJS @ 14.x
+   - Running the webserver on port 5000
+    - configurable in the .env file created in your express-babel directory
+    - note changing this will requre modiifying /etc/nginx/sites-enabled/default
+  - Install MongoDB @ 4.4
+  - Install PM2 for persisting your webserver process if and when you're ready.
+   - Install PM2 Logrotate so you don't get an out-of-memory error in a few months ;)
+  - Install BabelCli and Nodemon packages globally (cross-env is also installed but not currently used).
 
-```touch setup.sh && nano setup.sh```
+```touch setup.sh && chmod +x setup.sh && nano setup.sh```
 
-Paste In the Following Code:
+8 Paste In the Following Code:
+ - You will be prompted for an email address for your free certbot certificate registration.
+ - Read through the script before you install it.
 
 ```
 #!/bin/bash
 
 #pulls DOMAIN_NAME
 source config
+
+echo "Your domain $DOMAIN_NAME will be automatically validated."
+echo "Please make sure it is pointing to the correct IP address before you continue."
+
+read -p 'Please enter an email address for CertBot: ' EMAIL_ADDRESS
 
 echo "Disabling root login."
 
@@ -115,15 +157,15 @@ echo "Reloading SSHD Config"
 
 systemctl reload sshd -y
 
-#apt-get install -y bmon slurm tcptrack build-essential tcl
+apt-get install -y bmon slurm tcptrack build-essential tcl
 
 echo "Generating 2048 Bit DH Parabolic Long Prime for Encryption"
 
 openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 
-wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
 
-echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
 
 apt-get update
 
@@ -144,8 +186,6 @@ apt-get install -y nginx
 snap install --classic certbot
 
 # Ubuntu 20.04
-
-read -p 'Please enter an email address for CertBot: ' EMAIL_ADDRESS
 
 certbot --nginx --non-interactive --agree-tos -d $DOMAIN_NAME -m $EMAIL_ADDRESS
 
@@ -243,19 +283,19 @@ npm start
 
 Save the file and close your editor.  Again, make the file executable and run it:
 
-``` chmod +x setup.sh```
 ``` sudo ./setup.sh```
 
-This will prompt you for your password.  This takes a minute.  A lot is going on.
+ - You will be prompted for your password. Note: This takes aboute  minute.
 
-In the future I'll list all the dependencies.
+## Congrats
 
-After this, your server will be protected by a free ssh certificate and include the following stack:
+You're all finished.  
+ - Your dev server is setup and listening for changes to the directory files.
+ - Your Sass will be compiled to the dist folder in Main.css.
+ - You got a badass Nyan Cat Favion
 
-- Ubuntu20.04
-- NGINX listening on port 443 and forwarding port 80 to port 443, listening internally for
-- Node 14.x running on port 5000, being reverse proxied by NGINX
-- Express Server
-- Webpack / Sass Support / React / All Transpiled With Babel
+Using PM2, You can execute the production build of your server by running the following command.
 
-Read the configs, learn as much as you can.  Happy hunting.
+```npm run build && sudo pm2 start npm --name "My App" -- pm2server```
+
+Read the configs, learn as much as you can.  Happy hacking.
