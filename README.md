@@ -305,8 +305,9 @@ npm start
 #### 9. Save the file and close your editor.  Again, make the file executable and run it: ####
 
 ``` sudo ./setup.sh```
-
- - You will be prompted for your password. Note: This takes aboute  minute.
+ - Note: The install process takes aboute 9 minutes.
+ - You will be initially prompted for your password.
+ - You will be prompted towards the end to install MongoDB if you want to.
 
 ## Congrats ✨🎉
 
