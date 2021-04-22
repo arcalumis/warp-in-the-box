@@ -22,8 +22,6 @@ Notes: Before beginning, you should have a domain (or subdomain) registered and 
 
 ##### To-Do's for This Repo
  - Provide links to all component documentation
- - Better Demo Screen
- - More Descriptive Repository Name
  - Prompt to Make MongoDB Installation Optional
  - Prompt To Make Redis Optional
  - Prompt To Make PostGres Optional
@@ -292,7 +290,7 @@ rm -f setup.sh
 
 git clone https://github.com/arcalumis/warp-in-the-box.git
 
-cd express-babel
+cd warp-in-the-box
 
 npm install
 
