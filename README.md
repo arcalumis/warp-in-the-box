@@ -298,8 +298,6 @@ cat > .env <<- EOM
 PORT=5000
 EOM
 
-rm -rf .git
-
 echo "Starting your development server!!!!"
 
 npm start
