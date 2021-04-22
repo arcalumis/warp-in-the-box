@@ -2,15 +2,17 @@
 
 The purpose of this repository is to allow anyone to have the access to setting up a secure* webserver running the following stack:
 
-- Ubuntu 20.04 w/ easy sudo'd user setup for public key authentication
+- Ubuntu 20.04
+  - sudo user setup
+  - firewall limited traffic
 - NGINX with SSH Certificate Automatically Created
-- NodeJS (14.x) Running Express Webserver
+- NodeJS (14.x) running Express webserver
 - Babel transpilation, Sass and Webpack out-of-the-box.
 - MongoDB (soon to be optional)
 
 Quickly prototype an idea using advanced build tools.
 
-**All this set up in under  minutes**
+**Scratch to set up in 11 minutes**
 
 Notes: Before beginning, you should have a domain (or subdomain) registered and ready to point to a fresh server.
 *This will be necessary for setting up the ssl certificate.*
@@ -21,7 +23,6 @@ Notes: Before beginning, you should have a domain (or subdomain) registered and 
 ##### To-Do's for This Repo
  - Provide links to all component documentation
  - Better Demo Screen
- - Shill Links for Donation Addresses
  - More Descriptive Repository Name
  - Prompt to Make MongoDB Installation Optional
  - Prompt To Make Redis Optional
@@ -110,8 +111,9 @@ exit
 
 #### 5. Run it! ####
 - You will be asked for a username, a password and a public key for ssh authentication
-  - Check out [this great website](https://www.google.com/search?client=firefox-b-1-d&q=generating+ssk+keys) to find out how to generate ssh keys and other cool stuff
-- Have your public SSH key ready to copy and paste into the console when prompted.
+- You will be then prompted for a domain name and email address for your free certbot certificate registration.
+  - Check out [this great website](https://www.google.com/search?client=firefox-b-1-d&q=generating+ssh+keys) to find out how to generate ssh keys and other cool stuff
+- Tip: Have your public SSH key ready to copy and paste into the console when prompted.
 
 ```./setup.sh```
 
@@ -123,7 +125,7 @@ exit
 
 #### 6. Part One is Finished! Exit the terminal and log in as the user you've created. ####
 - Now you have a user with ssh access setup, and a config file waiting for you in your new user's home directory when you log in.
-- The config file merely contains the web address you entered towards the end of the previous step.
+- The config file merely contains the web address and email you entered towards the end of the previous step.
 - You can use this initial setup script to quickly create a new sudo user anytime if that's all you're after.
 
 #### 7. Now we'll create the setup file for Part Two. This script will: ####
@@ -149,13 +151,12 @@ exit
 ```touch setup.sh && chmod +x setup.sh && nano setup.sh```
 
 #### 8. Paste In the Following Code: ####
-- You will be prompted for an email address for your free certbot certificate registration.
-  - Read through the script before you install it.
+- Read through the script before you install it.
 
 ```
 #!/bin/bash
 
-#pulls DOMAIN_NAME
+#pulls DOMAIN_NAME and EMAIL_ADDRESS
 source config
 
 echo "Your domain $DOMAIN_NAME will be automatically validated."
@@ -297,6 +298,8 @@ cat > .env <<- EOM
 PORT=5000
 EOM
 
+rm -rf .git
+
 echo "Starting your development server!!!!"
 
 npm start
@@ -323,16 +326,21 @@ Restart your developments server with the following command.
 Using PM2, You can persist your web server by running the following commands.
 
 To webpack for production:
+
 ```npm run build``` 
 
 To create your initial webserver [docs](https://pm2.keymetrics.io/docs/usage/quick-start/)
+
 ```sudo pm2 start npm --name "webserver" -- pm2server```
 
-To persist your pm2 server configuration [docs](https://pm2.keymetrics.io/docs/usage/startup/)
-**DO NOT PASS SUDO TO THIS COMMAND, IT WILL PRINT THE EXACT COMMAND YOU WILL HAVE TO COPY PASTE INTO THE TERMINAL**
+To persist your pm2 server configuration: [docs](https://pm2.keymetrics.io/docs/usage/startup/)
+
 ```pm2 startup```
 
+**DO NOT PASS SUDO TO THIS COMMAND, IT WILL PRINT THE EXACT COMMAND YOU WILL HAVE TO COPY PASTE INTO THE TERMINAL**
+
 To disable pm2 for development purposes.
+
 ```sudo pm2 stop webserver```
 
-Read the configs, read the docs, learn as much as you can.  Happy hacking.
+Read the configs, read the docs, learn as much as you can. Happy hacking.
