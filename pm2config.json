@@ -1,0 +1,13 @@
+{
+  "apps": [
+    {
+      "name": "webserver",
+      "script": "npm",
+      "exec_mode": "fork",
+      "args": "run pm2server",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}
