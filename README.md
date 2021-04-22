@@ -100,10 +100,6 @@ echo "EMAIL_ADDRESS=\"$EMAIL_ADDRESS\"" >> /home/"$USERNAME"/config
 
 echo "Init complete, please exit and log back in using the credentials you've entered."
 
-read -n 1 -s -r -p "Press any key to continue."
-
-exit
-
 ```
 - Save the file and close the editor
 
