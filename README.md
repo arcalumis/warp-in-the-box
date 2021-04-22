@@ -92,21 +92,21 @@ echo "DOMAIN_NAME=\"$DOMAIN_NAME\"" >> /home/"$USERNAME"/config
 - Save the file and close the editor
 
 #### 5. Run it! ####
- - You will be asked for a username, a password and a public key for ssh authentication
- - Have your public SSH key ready to copy and paste in to the console when asked
+- You will be asked for a username, a password and a public key for ssh authentication
+- Have your public SSH key ready to copy and paste in to the console when asked
 
 ```./setup.sh```
 
- - DigitalOcean uses it's own packages so when you update and upgrade so:
+- DigitalOcean uses it's own packages so when you update and upgrade so:
   - If you are prompted to overwrite configuration file /etc/ssh/sshd_config: install the package maintainers version.
-   - If you're curious about the differences, view the diff, they're just comments in this case.
+    - If you're curious about the differences, view the diff, they're just comments in this case.
   - When asked about /etc/systemd/resolved.conf, type Y or I and press enter
-   - I believe this changes the DNS lookup address from DO's default
+    - I believe this changes the DNS lookup address from DO's default
 
 #### 6. Part One is Finished! Exit the terminal and log in as the user you've created. ####
- - Now you have a user with ssh access setup, and a config file waiting for you in your new user's home directory when you log in.
- - The config file merely contains the web address you entered towards the end
- - You can use this script to quickly create a new user anytime if that's all you're after.
+- Now you have a user with ssh access setup, and a config file waiting for you in your new user's home directory when you log in.
+- The config file merely contains the web address you entered towards the end
+- You can use this script to quickly create a new user anytime if that's all you're after.
 
 #### 7. Now we'll create the setup file for Part Two. ####
 - This script will:
@@ -132,8 +132,8 @@ echo "DOMAIN_NAME=\"$DOMAIN_NAME\"" >> /home/"$USERNAME"/config
 ```touch setup.sh && chmod +x setup.sh && nano setup.sh```
 
 #### 8. Paste In the Following Code: ####
- - You will be prompted for an email address for your free certbot certificate registration.
- - Read through the script before you install it.
+- You will be prompted for an email address for your free certbot certificate registration.
+  - Read through the script before you install it.
 
 ```
 #!/bin/bash
