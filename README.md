@@ -303,6 +303,10 @@ then
     
     pm2 install pm2-mongodb
     
+    systemctl start mongod
+    
+    systemctl enable mongod
+    
 fi
 
 echo "Starting your development server!!!!"
