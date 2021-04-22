@@ -11,7 +11,7 @@
 
 ## Let's get Started
 
-1 Setup a fresh Ubuntu20.04 Server
+1. #### Setup a fresh Ubuntu20.04 Server ####
  - I use [DigitalOcean](https://m.do.co/c/c3e5a07ebd4f) < My Referral Link
  - This has been tested on a $5/mo 1cpu/1gb server
 
