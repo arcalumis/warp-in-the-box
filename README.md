@@ -1,4 +1,17 @@
-# Basic Server Setup
+# Server Setup
+
+The purpose of this repository is to allow anyone to have the access to setting up a secure* webserver running the following stack:
+
+Ubuntu20.04
+NGINX with SSH Certificate Automatically Created
+NodeJS (14.x) Running Express Webserver
+Babel transpilation, Sass and Webpack out-of-the-box.
+
+Quickly prototype an idea using advanced build tools.
+
+All this set up in about 
+
+Notes: Before beginning, you should have a domain (or subdomain) registered and ready to point to a fresh server.  This will be necessary for setting up the ssl certificate.
 
 - It is not necessary to clone this repository.
  - All of the files will be automatically copied to your server.
