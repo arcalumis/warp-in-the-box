@@ -1,27 +1,31 @@
-# Server Setup
+# Preamble
 
 The purpose of this repository is to allow anyone to have the access to setting up a secure* webserver running the following stack:
 
-Ubuntu20.04
-NGINX with SSH Certificate Automatically Created
-NodeJS (14.x) Running Express Webserver
-Babel transpilation, Sass and Webpack out-of-the-box.
+- Ubuntu20.04
+- NGINX with SSH Certificate Automatically Created
+- NodeJS (14.x) Running Express Webserver
+- Babel transpilation, Sass and Webpack out-of-the-box.
+- MongoDB (soon to be optional)
 
 Quickly prototype an idea using advanced build tools.
 
-All this set up in about 
+**All this set up in under  minutes**
 
-Notes: Before beginning, you should have a domain (or subdomain) registered and ready to point to a fresh server.  This will be necessary for setting up the ssl certificate.
+Notes: Before beginning, you should have a domain (or subdomain) registered and ready to point to a fresh server.
+*This will be necessary for setting up the ssl certificate.*
 
 - It is not necessary to clone this repository.
  - All of the files will be automatically copied to your server.
 
-## To-Do's
+##### To-Do's for This Repo
  - Provide links to all component documentation
  - Better Demo Screen
  - Shill Links for Donation Addresses
  - More Descriptive Repository Name
- - Prompt for setup of secure mongodb connection
+ - Prompt to Make MongoDB Installation Optional
+ - Prompt To Make Redis Optional
+ - Prompt To Make PostGres Optional
 
 ## Let's get Started
 
@@ -64,10 +68,6 @@ else
   exit
 fi
 
-apt-get update -y
-
-apt-get upgrade -y
-
 CRYPTPASS=$(openssl passwd -crypt "$PASSWORD")
 
 useradd -m -p $CRYPTPASS -s /bin/bash -G sudo $USERNAME
@@ -84,23 +84,16 @@ chmod 600 /home/"$USERNAME"/.ssh/authorized_keys
 
 chown "$USERNAME":"$USERNAME" /home/"$USERNAME"/.ssh/authorized_keys
 
-echo "Copying Node Mongo NGINX Setup Script"
-
-cp node-mongo-nginx.sh /home/"$USERNAME"/node-mongo-nginx.sh
-
-chmod 700 /home/"$USERNAME"/node-mongo-nginx.sh
-
-chown "$USERNAME":"$USERNAME" /home/"$USERNAME"/node-mongo-nginx.sh
-
-echo "Copy Complete"
-
 echo "Generating Config for Step 2"
 
-read -p 'Please enter a domain: ' DOMAIN_NAME
+read -p 'Please enter the domain name of this server: ' DOMAIN_NAME
+
+read -p 'Please enter an email address for cerbot certificate: ' EMAIL_ADDRESS
 
 touch /home/"$USERNAME"/config
 
 echo "DOMAIN_NAME=\"$DOMAIN_NAME\"" >> /home/"$USERNAME"/config
+echo "EMAIL_ADDRESS=\"$EMAIL_ADDRESS\"" >> /home/"$USERNAME"/config
 
 ```
 - Save the file and close the editor
@@ -158,7 +151,11 @@ source config
 echo "Your domain $DOMAIN_NAME will be automatically validated."
 echo "Please make sure it is pointing to the correct IP address before you continue."
 
-read -p 'Please enter an email address for CertBot: ' EMAIL_ADDRESS
+read -n 1 -s -r -p "Press any key to continue"
+
+apt-get update -y
+
+apt-get upgrade -y
 
 echo "Disabling root login."
 
