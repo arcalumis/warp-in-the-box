@@ -279,39 +279,17 @@ EOM
 
 chown -R "$SUDO_USER":"$SUDO_USER" /home/"$SUDO_USER"/warp-in-the-box
 
+cd ~
+
 echo "Cleaning Up"
 
 rm -f ../config
 
 rm -f ../setup.sh
 
-read -p "Would you like to install MongoDB? " -n 1 -r
-
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
-
-    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
-
-    apt-get update
-
-    apt-get install -y mongodb-org
-    
-    echo "Installing NPM Packages MongoDB and Mongoose"
-    
-    npm i -s mongodb mongoose
-    
-    echo "Installing MongoDB monitor for PM2
-    
-    pm2 install pm2-mongodb
-    
-    systemctl start mongod
-    
-    systemctl enable mongod
-    
-fi
-
 echo "Starting your development server!!!!"
+
+cd warp-in-the-box
 
 npm start
 
