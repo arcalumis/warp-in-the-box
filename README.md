@@ -279,8 +279,6 @@ EOM
 
 chown -R "$SUDO_USER":"$SUDO_USER" /home/"$SUDO_USER"/warp-in-the-box
 
-cd ~
-
 echo "Cleaning Up"
 
 rm -f ../config
