@@ -287,8 +287,6 @@ rm -f ../setup.sh
 
 echo "Starting your development server!!!!"
 
-cd warp-in-the-box
-
 npm start
 
 ```
