@@ -265,6 +265,15 @@ npm install -g pm2 @babel/core @babel/cli cross-env nodemon
 
 pm2 install pm2-logrotate
 
+if [ $INSTALL_MONGODB = "yes" ]; then
+  wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+  echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+  sudo apt-get update
+  sudo apt-get install -y mongodb-org
+  sudo systemctl restart mongod
+  sudo systemctl enable mongod
+fi
+
 cd /home/"$SUDO_USER"
 
 git clone https://github.com/arcalumis/warp-in-the-box.git
