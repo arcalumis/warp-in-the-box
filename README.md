@@ -300,31 +300,30 @@ rm -f ../config
 
 rm -f ../setup.sh
 
-echo "Starting your development server!!!!"
-
-npm start
+echo "Finished Installing!"
+echo ""
+echo "Start your development server by running: npm start
 
 ```
 
 #### 9. Save the file and close your editor.  Again, make the file executable and run it: ####
 
 ``` sudo ./setup.sh```
- - Note: The install process takes aboute 9 minutes.
+ - Note: The install process takes aboute 9 or 10 minutes depending on the options you've selected
  - You will be initially prompted for your password.
- - You will be prompted towards the end to install MongoDB if you want to.
 
 ## Congrats ✨🎉
 
 You're all finished.  
- - Your dev server is setup, running and listening for changes to the directory files.
- - Your Sass will be compiled to the dist folder in Main.css.
+ - Your dev server is setup and ready to run
+ - Your Sass will be compiled to the dist folder in main.css.
  - You got a badass Nyan Cat Favion
 
-Restart your development server with the following command.
+Start your development server with the following command:
 
-```npm run start```
+```npm start```
 
-Using PM2, You can persist your web server by running the following commands.
+Using PM2, You can persist your web server by running the following commands:
 
 To webpack for production:
 
@@ -343,5 +342,7 @@ To persist your pm2 server configuration: [docs](https://pm2.keymetrics.io/docs/
 To disable pm2 for development purposes.
 
 ```sudo pm2 stop webserver```
+
+Don't forget to re-run ```npm run build``` to webpack for production after making changes in development before restarting your pm2 server with ```sudo pm2 restart webserver```
 
 Read the configs, read the docs, learn as much as you can. Happy hacking.
