@@ -90,7 +90,25 @@ read -p 'Please enter the domain name of this server: ' DOMAIN_NAME
 
 read -p 'Please enter an email address for cerbot certificate: ' EMAIL_ADDRESS
 
+read -p "Would you like to install MongoDB? (y/n)?" choice
+case "$choice" in 
+  y|Y ) echo "yes";;
+  n|N ) echo "no";;
+  * ) echo "invalid";;
+esac
+
 touch /home/"$USERNAME"/config
+
+read -p "Would you like to install MongoDB (y/n)?" -r choice
+case "$choice" in
+  y|Y ) echo ""
+echo "MongoDb will be installed."
+echo "INSTALL_MONGODB=\"yes\"" >> /home/"$USERNAME"/config
+;;
+  n|N|* ) echo ""
+echo "MongoDb will not be installed."
+echo "INSTALL_MONGODB=\"no\"" >> /home/"$USERNAME"/config;;
+esac
 
 echo "DOMAIN_NAME=\"$DOMAIN_NAME\"" >> /home/"$USERNAME"/config
 echo "EMAIL_ADDRESS=\"$EMAIL_ADDRESS\"" >> /home/"$USERNAME"/config
