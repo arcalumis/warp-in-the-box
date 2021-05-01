@@ -118,9 +118,7 @@ echo "Init complete, please exit and log back in using the credentials you've en
 
 - DigitalOcean uses it's own packages so when you update and upgrade you may encounter the following:
   - If you are prompted to overwrite configuration file /etc/ssh/sshd_config: install the package maintainers version.
-    - If you're curious about the differences, view the diff, they're just comments in this case.
-  - When asked about /etc/systemd/resolved.conf, type Y or I and press enter
-    - I believe this changes the DNS lookup address from DO's default
+    - If you're curious about the differences, view the diff. They should be trivial comment differences but you never know.
 
 #### 6. Part One is Finished! Exit the terminal and log in as the user you've created. ####
 - Now you have a user with ssh access setup, and a config file waiting for you in your new user's home directory when you log in.
