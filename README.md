@@ -322,7 +322,7 @@ You're all finished.
  - Your Sass will be compiled to the dist folder in Main.css.
  - You got a badass Nyan Cat Favion
 
-Restart your developments server with the following command.
+Restart your development server with the following command.
 
 ```npm run start```
 
