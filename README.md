@@ -302,7 +302,7 @@ rm -f ../setup.sh
 
 echo "Finished Installing!"
 echo ""
-echo "Start your development server by running: npm start
+echo "Start your development server by running: npm start"
 
 ```
 
